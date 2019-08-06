@@ -30,6 +30,8 @@ type SharedDataGridProps<R> = Pick<DataGridProps<R>,
 | 'onHeaderDrop'
 | 'getSubRowDetails'
 | 'editorPortalTarget'
+| 'isMultipleSort'
+| 'sortArray'
 >;
 
 type SharedDataGridState<R> = Pick<DataGridState<R>,
@@ -108,6 +110,8 @@ export default class Grid<R extends {}> extends React.Component<GridProps<R>> {
           headerRows={headerRows}
           sortColumn={this.props.sortColumn}
           sortDirection={this.props.sortDirection}
+          isMultipleSort={this.props.isMultipleSort}
+          sortArray={this.props.sortArray}
           draggableHeaderCell={this.props.draggableHeaderCell}
           onSort={this.props.onSort}
           onHeaderDrop={this.props.onHeaderDrop}

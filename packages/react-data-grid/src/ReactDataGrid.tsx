@@ -127,6 +127,9 @@ export interface DataGridProps<R extends {}> {
   sortColumn?: keyof R;
   /** The direction to sort the sortColumn*/
   sortDirection?: DEFINE_SORT;
+  /** The ability to sort by multiple columns*/
+  isMultipleSort?: boolean;
+  sortArray?: { columnKey: keyof R, direction: DEFINE_SORT }[];
   /** Called when the grid is scrolled */
   onScroll?(scrollState: ScrollState): void;
   /** Component used to render a draggable header cell */
@@ -708,6 +711,8 @@ export default class ReactDataGrid<R extends {} = RowData> extends React.Compone
           rowSelection={this.getRowSelectionProps()}
           rowOffsetHeight={this.getRowOffsetHeight()}
           sortColumn={this.state.sortColumn}
+          sortArray={this.props.sortArray}
+          isMultipleSort={this.props.isMultipleSort}
           sortDirection={this.state.sortDirection}
           onSort={this.handleSort}
           minHeight={this.props.minHeight}

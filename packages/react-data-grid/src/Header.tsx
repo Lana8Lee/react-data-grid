@@ -17,6 +17,8 @@ type SharedGridProps<R> = Pick<GridProps<R>,
 | 'headerRows'
 | 'sortColumn'
 | 'sortDirection'
+| 'isMultipleSort'
+| 'sortArray'
 | 'draggableHeaderCell'
 | 'onSort'
 | 'onHeaderDrop'
@@ -101,6 +103,8 @@ export default class Header<R extends {}> extends React.Component<HeaderProps<R>
           onHeaderDrop={this.props.onHeaderDrop}
           sortColumn={this.props.sortColumn}
           sortDirection={this.props.sortDirection}
+          isMultipleSort={this.props.isMultipleSort}
+          sortArray={this.props.sortArray}
           onSort={this.props.onSort}
           getValidFilterValues={this.props.getValidFilterValues}
         />

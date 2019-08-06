@@ -15,6 +15,8 @@ type SharedHeaderProps<R> = Pick<HeaderProps<R>,
 | 'onHeaderDrop'
 | 'sortColumn'
 | 'sortDirection'
+| 'isMultipleSort'
+| 'sortArray'
 | 'onSort'
 | 'getValidFilterValues'
 >;
@@ -44,6 +46,8 @@ export default class HeaderRow<R> extends React.Component<HeaderRowProps<R>> {
       || !shallowEqual(nextProps.style, this.props.style)
       || this.props.sortColumn !== nextProps.sortColumn
       || this.props.sortDirection !== nextProps.sortDirection
+      || this.props.isMultipleSort !== nextProps.isMultipleSort
+      || !shallowEqual(nextProps.sortArray, this.props.sortArray)
     );
   }
 
@@ -71,7 +75,10 @@ export default class HeaderRow<R> extends React.Component<HeaderRowProps<R>> {
   }
 
   getSortableHeaderCell(column: CalculatedColumn<R>) {
-    const sortDirection = this.props.sortColumn === column.key && this.props.sortDirection || DEFINE_SORT.NONE;
+    const { isMultipleSort, sortArray = [] } = this.props;
+    const currentColumn = sortArray.find(c => c.columnKey === column.key);
+
+    const sortDirection = isMultipleSort ? currentColumn ? currentColumn.direction : DEFINE_SORT.NONE : this.props.sortColumn === column.key && this.props.sortDirection || DEFINE_SORT.NONE;
     const sortDescendingFirst = column.sortDescendingFirst || false;
     return (
       <SortableHeaderCell<R>
